@@ -1,6 +1,6 @@
 import { AuthenticatedTemplate, UnauthenticatedTemplate } from '@azure/msal-react';
 import './App.css';
-import { SignInButton, SignOutButton, SignUpButton } from './components';
+import { SignInButton, SignOutButton, SignUpButton, WelcomeMessage } from './components';
 
 export const App = () => {
     return (
@@ -11,6 +11,7 @@ export const App = () => {
                 <SignUpButton />
             </UnauthenticatedTemplate>
             <AuthenticatedTemplate>
+                <WelcomeMessage />
                 <SignOutButton />
             </AuthenticatedTemplate>
         </section>

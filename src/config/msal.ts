@@ -4,12 +4,14 @@ import {
     EventType,
     PublicClientApplication,
     type RedirectRequest,
+    type SilentRequest,
 } from '@azure/msal-browser';
+import { env } from './env';
 
 export const msalInstance = new PublicClientApplication({
     auth: {
-        clientId: import.meta.env.VITE_ENTRA_CLIENT_ID,
-        authority: import.meta.env.VITE_ENTRA_AUTHORITY,
+        clientId: env.VITE_ENTRA_CLIENT_ID,
+        authority: env.VITE_ENTRA_AUTHORITY,
         redirectUri: '/redirect.html',
         postLogoutRedirectUri: '/',
     },
@@ -20,6 +22,10 @@ export const msalInstance = new PublicClientApplication({
 
 export const loginRequest: RedirectRequest = {
     scopes: [],
+};
+
+export const apiRequest: SilentRequest = {
+    scopes: [env.VITE_API_SCOPE_READ],
 };
 
 const setSignedInAccountAsActive = (event: EventMessage) => {
