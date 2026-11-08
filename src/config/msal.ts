@@ -12,7 +12,7 @@ export const msalInstance = new PublicClientApplication({
     auth: {
         clientId: env.VITE_ENTRA_CLIENT_ID,
         authority: env.VITE_ENTRA_AUTHORITY,
-        redirectUri: '/redirect.html',
+        redirectUri: '/redirect',
         postLogoutRedirectUri: '/',
     },
     cache: {

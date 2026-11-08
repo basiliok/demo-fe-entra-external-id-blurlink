@@ -1,19 +1,23 @@
-import { AuthenticatedTemplate, UnauthenticatedTemplate } from '@azure/msal-react';
+import { MsalProvider } from '@azure/msal-react';
+import { BrowserRouter, Route, Routes } from 'react-router';
 import './App.css';
-import { SignInButton, SignOutButton, SignUpButton, WelcomeMessage } from './components';
+import { msalInstance } from './config/msal';
+import { Home, RedirectBridge } from './pages';
 
 export const App = () => {
     return (
-        <section id="center">
-            <h1>demo-fe-entra-external-id-blurlink</h1>
-            <UnauthenticatedTemplate>
-                <SignInButton />
-                <SignUpButton />
-            </UnauthenticatedTemplate>
-            <AuthenticatedTemplate>
-                <WelcomeMessage />
-                <SignOutButton />
-            </AuthenticatedTemplate>
-        </section>
+        <BrowserRouter>
+            <Routes>
+                <Route path="/redirect" element={<RedirectBridge />} />
+                <Route
+                    path="/"
+                    element={
+                        <MsalProvider instance={msalInstance}>
+                            <Home />
+                        </MsalProvider>
+                    }
+                />
+            </Routes>
+        </BrowserRouter>
     );
 };
