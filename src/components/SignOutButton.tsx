@@ -4,7 +4,8 @@ export const SignOutButton = () => {
     const { instance } = useMsal();
 
     const handleSignOut = () => {
-        instance.logoutRedirect().catch((error: unknown) => console.error(error));
+        const activeAccount = instance.getActiveAccount();
+        instance.logoutRedirect({ account: activeAccount }).catch((error: unknown) => console.error(error));
     };
 
     return (
