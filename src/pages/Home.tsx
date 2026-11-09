@@ -3,16 +3,19 @@ import { SignInButton, SignOutButton, SignUpButton, WelcomeMessage } from '../co
 
 export const Home = () => {
     return (
-        <section id="center">
-            <h1>demo-fe-entra-external-id-blurlink</h1>
-            <UnauthenticatedTemplate>
-                <SignInButton />
-                <SignUpButton />
-            </UnauthenticatedTemplate>
-            <AuthenticatedTemplate>
-                <WelcomeMessage />
-                <SignOutButton />
-            </AuthenticatedTemplate>
-        </section>
+        <>
+            <h1>Blurlink</h1>
+
+            <section>
+                <UnauthenticatedTemplate>
+                    <SignInButton />
+                    <SignUpButton />
+                </UnauthenticatedTemplate>
+                <AuthenticatedTemplate>
+                    <WelcomeMessage />
+                    <SignOutButton />
+                </AuthenticatedTemplate>
+            </section>
+        </>
     );
 };

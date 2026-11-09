@@ -15,9 +15,11 @@ export const WelcomeMessage = () => {
     return (
         <section>
             <h2>¡Bienvenido, {currentUser.name}!</h2>
-            <p>Nombre: {currentUser.givenName}</p>
-            <p>Apellido: {currentUser.familyName}</p>
-            <p>Email: {currentUser.email}</p>
+            <div>
+                <p>Nombre: {currentUser.givenName}</p>
+                <p>Apellido: {currentUser.familyName}</p>
+                <p>Email: {currentUser.email}</p>
+            </div>
         </section>
     );
 };
