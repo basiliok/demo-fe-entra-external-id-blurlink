@@ -8,10 +8,13 @@ import {
 } from '@azure/msal-browser';
 import { env } from './env';
 
+const entraAuthority = `https://${env.VITE_ENTRA_TENANT_SUBDOMAIN}.ciamlogin.com/${env.VITE_ENTRA_TENANT_ID}`;
+const apiReadScope = `api://${env.VITE_ENTRA_API_CLIENT_ID}/Blurlinks.Read`;
+
 export const msalInstance = new PublicClientApplication({
     auth: {
-        clientId: env.VITE_ENTRA_CLIENT_ID,
-        authority: env.VITE_ENTRA_AUTHORITY,
+        clientId: env.VITE_ENTRA_SPA_CLIENT_ID,
+        authority: entraAuthority,
         redirectUri: '/redirect',
         postLogoutRedirectUri: '/redirect',
     },
@@ -25,7 +28,7 @@ export const loginRequest: RedirectRequest = {
 };
 
 export const apiRequest: SilentRequest = {
-    scopes: [env.VITE_API_SCOPE_READ],
+    scopes: [apiReadScope],
 };
 
 const setSignedInAccountAsActive = (event: EventMessage) => {
