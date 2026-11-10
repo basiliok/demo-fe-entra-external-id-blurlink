@@ -1,73 +1,45 @@
-# React + TypeScript + Vite
+# demo-fe-entra-external-id-blurlink
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Frontend en React de una demo de **Microsoft Entra External ID**, el servicio de Microsoft para que los usuarios de una app puedan registrarse e iniciar sesión.
 
-Currently, two official plugins are available:
+El backend está en [demo-be-entra-external-id-blurlink](https://github.com/basiliok/demo-be-entra-external-id-blurlink).
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Requisitos
 
-## React Compiler
+- Node.js 24
+- Un tenant externo de Entra External ID con el frontend y la API registrados (de ahí salen los valores del `.env`). Para configurarlo, sigue [esta guía](url).
+- El backend levantado, porque de ahí salen los datos del mensaje de bienvenida.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Cómo levantarlo
 
-## Expanding the ESLint configuration
+1. Instala las dependencias.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+    ```bash
+    npm install
+    ```
 
-```js
-export default defineConfig([
-    globalIgnores(['dist']),
-    {
-        files: ['**/*.{ts,tsx}'],
-        extends: [
-            // Other configs...
+2. Crea el archivo `.env` en la raíz del proyecto con estos campos.
 
-            // Remove tseslint.configs.recommended and replace with this
-            tseslint.configs.recommendedTypeChecked,
-            // Alternatively, use this for stricter rules
-            tseslint.configs.strictTypeChecked,
-            // Optionally, add this for stylistic rules
-            tseslint.configs.stylisticTypeChecked,
+    ```dotenv
+    VITE_ENTRA_TENANT_SUBDOMAIN=your-external-tenant-subdomain
+    VITE_ENTRA_TENANT_ID=your-external-tenant-id
+    VITE_ENTRA_SPA_CLIENT_ID=your-spa-app-client-id
+    VITE_ENTRA_API_CLIENT_ID=your-api-app-client-id
+    VITE_ENTRA_API_READ_SCOPE=Blurlinks.Read
+    VITE_API_BASE_URL=http://localhost:3000
+    ```
 
-            // Other configs...
-        ],
-        languageOptions: {
-            parserOptions: {
-                project: ['./tsconfig.node.json', './tsconfig.app.json'],
-                tsconfigRootDir: import.meta.dirname,
-            },
-            // other options...
-        },
-    },
-]);
-```
+    Reemplaza los valores que empiezan con `your-` por los de tu tenant. Los encuentras en el [Microsoft Entra admin center](https://entra.microsoft.com/). Antes revisa, arriba a la derecha, que estés en el tenant externo de este proyecto. Si no, cámbialo con el ícono del engranaje.
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+    - `VITE_ENTRA_TENANT_SUBDOMAIN`: en el menú de la izquierda entra a **Entra ID** y luego a **Overview**. En la pestaña **Overview** mira **Primary domain**. El subdominio es la parte de antes de `.onmicrosoft.com`. Por ejemplo, si el dominio es `miempresa.onmicrosoft.com`, el subdominio es `miempresa`.
+    - `VITE_ENTRA_TENANT_ID`: en la misma pestaña, el valor de **Tenant ID**.
+    - `VITE_ENTRA_SPA_CLIENT_ID`: en **App registrations**, pestaña **All applications**, busca tu frontend y copia el valor de la columna **Application (client) ID**.
+    - `VITE_ENTRA_API_CLIENT_ID`: en la misma lista, el **Application (client) ID** de tu API.
+    - `VITE_ENTRA_API_READ_SCOPE`: el nombre del scope que creaste en **Expose an API**, sin el `api://...` del inicio. Si usaste el de la guía, déjalo como está.
+    - `VITE_API_BASE_URL`: la URL del backend, sin `/` al final. Si usas el backend de esta demo, déjala como está.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x';
-import reactDom from 'eslint-plugin-react-dom';
+3. Levanta el frontend. Queda en `http://localhost:5173`.
 
-export default defineConfig([
-    globalIgnores(['dist']),
-    {
-        files: ['**/*.{ts,tsx}'],
-        extends: [
-            // Other configs...
-            // Enable lint rules for React
-            reactX.configs['recommended-typescript'],
-            // Enable lint rules for React DOM
-            reactDom.configs.recommended,
-        ],
-        languageOptions: {
-            parserOptions: {
-                project: ['./tsconfig.node.json', './tsconfig.app.json'],
-                tsconfigRootDir: import.meta.dirname,
-            },
-            // other options...
-        },
-    },
-]);
-```
+    ```bash
+    npm run dev
+    ```
