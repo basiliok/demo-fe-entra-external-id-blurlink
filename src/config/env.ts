@@ -7,6 +7,9 @@ const envSchema = z.object({
     VITE_ENTRA_TENANT_ID: z.guid(),
     VITE_ENTRA_SPA_CLIENT_ID: z.guid(),
     VITE_ENTRA_API_CLIENT_ID: z.guid(),
+    VITE_ENTRA_API_READ_SCOPE: z
+        .string()
+        .regex(/^[^/\s]+$/, 'Use only the scope name, e.g. Blurlinks.Read (without api://...)'),
     VITE_API_BASE_URL: z.url(),
 });
 

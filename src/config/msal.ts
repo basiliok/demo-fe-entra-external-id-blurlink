@@ -9,7 +9,7 @@ import {
 import { env } from './env';
 
 const entraAuthority = `https://${env.VITE_ENTRA_TENANT_SUBDOMAIN}.ciamlogin.com/${env.VITE_ENTRA_TENANT_ID}`;
-const apiReadScope = `api://${env.VITE_ENTRA_API_CLIENT_ID}/Blurlinks.Read`;
+const apiReadScope = `api://${env.VITE_ENTRA_API_CLIENT_ID}/${env.VITE_ENTRA_API_READ_SCOPE}`;
 
 export const msalInstance = new PublicClientApplication({
     auth: {
