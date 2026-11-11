@@ -7,7 +7,7 @@ El backend está en [demo-be-entra-external-id-blurlink](https://github.com/basi
 ## Requisitos
 
 - Node.js 24
-- Un tenant externo de Entra External ID con el frontend y la API registrados (de ahí salen los valores del `.env`). Para configurarlo, sigue [esta guía](url).
+- Un tenant externo de Entra External ID con el frontend y la API registrados (de ahí salen los valores del `.env`). Para configurarlo, sigue [esta guía](https://dev.to/basiliok/como-configurar-microsoft-entra-external-id-para-el-login-de-tu-app-web-idd).
 - El backend levantado, porque de ahí salen los datos del mensaje de bienvenida.
 
 ## Cómo levantarlo
